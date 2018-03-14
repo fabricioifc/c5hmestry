@@ -31,7 +31,7 @@ import { AppHistoriaComponent } from './app-historia/app-historia.component';
     SubscriberPageComponent,
     AppNavbarComponent,
     AppFooterComponent,
-    AppHistoriaComponent
+    AppHistoriaComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { AuthService } from './core/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +12,15 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 })
 export class AppComponent implements OnInit {
 
+  constructor(
+    private afs: AngularFirestore,
+    public auth: AuthService,
+    private _flashMessagesService: FlashMessagesService) {
 
-  constructor(private _flashMessagesService: FlashMessagesService) { }
+  }
 
   ngOnInit() {
     // this._flashMessagesService.show('We are in app component!', { cssClass: 'alert-success', timeout: 1000 });
   }
-
 
 }

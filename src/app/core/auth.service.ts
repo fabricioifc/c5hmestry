@@ -12,7 +12,7 @@ export class AuthService {
 
   user$: Observable<User>;
 
-  constructor(private afAuth: AngularFireAuth,
+  constructor(public afAuth: AngularFireAuth,
               private afs: AngularFirestore,
               private router: Router) {
       //// Get auth data, then get firestore user document || null
@@ -75,8 +75,6 @@ export class AuthService {
     const allowed = ['admin']
     return this.checkAuthorization(user, allowed)
   }
-
-
 
   // determines if user has matching role
   private checkAuthorization(user: User, allowedRoles: string[]): boolean {

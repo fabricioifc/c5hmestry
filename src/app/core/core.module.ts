@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './auth.service';
 import { AdminGuard } from './admin.guard';
+import { UserGuard } from './user.guard';
 import { CanReadGuard } from './can-read.guard';
 
 @NgModule({
@@ -9,6 +10,6 @@ import { CanReadGuard } from './can-read.guard';
     CommonModule
   ],
   declarations: [],
-  providers: [AuthService, AdminGuard, CanReadGuard]
+  providers: [AuthService, AdminGuard, CanReadGuard, UserGuard]
 })
 export class CoreModule { }
