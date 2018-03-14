@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   constructor(private _flashMessagesService: FlashMessagesService) { }
 
   ngOnInit() {
-    this._flashMessagesService.show('We are in app component!', { cssClass: 'alert-success', timeout: 9999999999 });
+    // this._flashMessagesService.show('We are in app component!', { cssClass: 'alert-success', timeout: 1000 });
   }
 
 

@@ -23,8 +23,8 @@ export class AdminGuard implements CanActivate {
       tap(isAdmin => {
         if (!isAdmin) {
           this.message = "Acesso negado - Apenas para administradores"
-          console.error(this.message)
-          this._flashMessagesService.show(this.message, { cssClass: 'alert-danger', timeout: 1000 });
+          // console.error(this.message)
+          this._flashMessagesService.show(this.message, { cssClass: 'alert-danger', timeout: 999999, showCloseBtn: true })
         }
       })
     );

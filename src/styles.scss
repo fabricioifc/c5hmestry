@@ -1,3 +1,23 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+body main {
+  padding: 80px 15px 0;
+}
+
+code {
+  font-size: 80%;
+}
+
+
 .btn-social {
   color: #fff;
 
@@ -19,27 +39,5 @@
   background-color: #dd4b39;
 }
 
-.content {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 10vh 20vw;
-}
-
-#grayOutDiv {
-  background-color: #333;
-  opacity: 0.7;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  z-index: 9999;
-}
-
-.flash-message {
-  z-index: 10000;
-  position: relative;
-}
+#flashMessages .flash-message{display:none;}
+#flashMessages .flash-message:last-child{display:block;}

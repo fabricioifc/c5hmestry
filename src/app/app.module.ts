@@ -18,6 +18,9 @@ import { CoreModule } from './core/core.module';
 import { SubscriberPageComponent } from './subscriber-page/subscriber-page.component';
 
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import { AppNavbarComponent } from './app-navbar/app-navbar.component';
+import { AppFooterComponent } from './app-footer/app-footer.component';
+import { AppHistoriaComponent } from './app-historia/app-historia.component';
 
 
 @NgModule({
@@ -25,7 +28,10 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
     AppComponent,
     SuperSecretComponent,
     UserLoginComponent,
-    SubscriberPageComponent
+    SubscriberPageComponent,
+    AppNavbarComponent,
+    AppFooterComponent,
+    AppHistoriaComponent
   ],
   imports: [
     BrowserModule,
