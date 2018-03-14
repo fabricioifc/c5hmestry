@@ -33,6 +33,7 @@ functions/node_modules
 
 # misc
 /.sass-cache
+/.scss-cache
 /connect.lock
 /coverage
 /libpeerconnection.log

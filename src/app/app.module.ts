@@ -10,15 +10,15 @@ import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
-/// DELETE firebaseConfig
-/// Add your own firebase config to environment.ts
-/// Then use it to initialize angularfire2 AngularFireModule.initializeApp(environment.firebaseConfig),
-import { firebaseConfig } from '../env';
+import { firebaseConfig } from '../environments/firebase.config';
 import { SuperSecretComponent } from './super-secret/super-secret.component';
-import { UserLoginComponent } from './user-login/user-login.component'; 
+import { UserLoginComponent } from './user-login/user-login.component';
 
 import { CoreModule } from './core/core.module';
 import { SubscriberPageComponent } from './subscriber-page/subscriber-page.component';
+
+import { FlashMessagesModule } from 'angular2-flash-messages';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +33,8 @@ import { SubscriberPageComponent } from './subscriber-page/subscriber-page.compo
     CoreModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    FlashMessagesModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

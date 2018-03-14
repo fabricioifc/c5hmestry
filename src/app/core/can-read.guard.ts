@@ -3,11 +3,13 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angul
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from './auth.service';
 import { tap, map, take } from 'rxjs/operators';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Injectable()
 export class CanReadGuard implements CanActivate {
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService,
+              private _flashMessagesService: FlashMessagesService) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -19,6 +21,7 @@ export class CanReadGuard implements CanActivate {
       tap(canView => {
         if (!canView) {
           console.error('Access denied. Must have permission to view content')
+          this._flashMessagesService.show('Acesso negado. Deve ter permissão para ver este conteúdo', { cssClass: 'alert alert-danger', timeout: 15000 });
         }
       })
     );

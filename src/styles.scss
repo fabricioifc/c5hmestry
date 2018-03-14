@@ -1,0 +1,45 @@
+.btn-social {
+  color: #fff;
+
+  i {
+    margin-right: 5px;
+  }
+
+  &:hover {
+    color: #fff;
+    box-shadow: 0 14px 26px -12px rgba(0, 0, 0, 0.2), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-block {
+    margin-bottom: 10px;
+  }
+}
+
+.btn-google {
+  background-color: #dd4b39;
+}
+
+.content {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10vh 20vw;
+}
+
+#grayOutDiv {
+  background-color: #333;
+  opacity: 0.7;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.flash-message {
+  z-index: 10000;
+  position: relative;
+}

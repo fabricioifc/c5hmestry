@@ -5,7 +5,7 @@ import { AuthService } from '../core/auth.service';
 @Component({
   selector: 'subscriber-page',
   templateUrl: './subscriber-page.component.html',
-  styleUrls: ['./subscriber-page.component.sass']
+  styleUrls: ['./subscriber-page.component.scss']
 })
 export class SubscriberPageComponent implements OnInit {
 
@@ -13,7 +13,7 @@ export class SubscriberPageComponent implements OnInit {
   post$;
   user;
 
-  constructor(private afs: AngularFirestore, public auth: AuthService) { 
+  constructor(private afs: AngularFirestore, public auth: AuthService) {
    this.auth.user$.subscribe(user => this.user = user)
   }
 
