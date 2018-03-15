@@ -26,6 +26,7 @@ import { UserSignupComponent } from './user-signup/user-signup.component';
 import { NotificationMessageComponent } from './ui/notification-message/notification-message.component';
 import { AppVidrariaComponent } from './app-vidraria/app-vidraria.component';
 
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { AppVidrariaComponent } from './app-vidraria/app-vidraria.component';
     AngularFirestoreModule,
     AngularFireAuthModule,
     FlashMessagesModule.forRoot(),
+    Ng4LoadingSpinnerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
