@@ -11,7 +11,7 @@ import { AuthService } from '../core/auth.service';
   styleUrls: ['./app-navbar.component.scss']
 })
 export class AppNavbarComponent implements OnInit {
-
+  
   constructor(
     private afs: AngularFirestore,
     public auth: AuthService,

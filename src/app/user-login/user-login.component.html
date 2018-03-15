@@ -56,7 +56,7 @@
   <div *ngIf="auth.user$ | async as user">
     <h3>Howdy, {{ user.displayName }}</h3>
     <!-- <img  src="assets/avatar.svg" width="50px"> -->
-    <img  src="{{user.photoURL}}" width="50px">
+    <img  src="{{ auth.getUserAvatar() }}" width="50px">
     <p>UID: {{ user.uid }}</p>
     <button (click)="auth.signOut()" class="button">Logout</button>
 

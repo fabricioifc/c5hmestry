@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-historia',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppHistoriaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private afs: AngularFirestore) {
+  }
 
   ngOnInit() {
   }

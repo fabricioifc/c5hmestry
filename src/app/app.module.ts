@@ -23,6 +23,8 @@ import { AppNavbarComponent } from './app-navbar/app-navbar.component';
 import { AppFooterComponent } from './app-footer/app-footer.component';
 import { AppHistoriaComponent } from './app-historia/app-historia.component';
 import { UserSignupComponent } from './user-signup/user-signup.component';
+import { NotificationMessageComponent } from './ui/notification-message/notification-message.component';
+import { AppVidrariaComponent } from './app-vidraria/app-vidraria.component';
 
 
 @NgModule({
@@ -35,6 +37,8 @@ import { UserSignupComponent } from './user-signup/user-signup.component';
     AppFooterComponent,
     AppHistoriaComponent,
     UserSignupComponent,
+    NotificationMessageComponent,
+    AppVidrariaComponent,
   ],
   imports: [
     BrowserModule,

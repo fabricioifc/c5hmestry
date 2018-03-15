@@ -5,23 +5,26 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { switchMap } from 'rxjs/operators';
-import { User } from './user';
+import { User } from './model/user';
 
-import { FlashMessagesService } from 'angular2-flash-messages';
+import { NotifyService } from './notify.service';
 
 @Injectable()
 export class AuthService {
 
   user$: Observable<User>;
 
+  avatar: string;
+
   constructor(public afAuth: AngularFireAuth,
             private afs: AngularFirestore,
             private router: Router,
-            private _flashMessagesService: FlashMessagesService) {
+            private notify: NotifyService) {
       //// Get auth data, then get firestore user document || null
       this.user$ = this.afAuth.authState
         .switchMap(user => {
           if (user) {
+            this.avatar = user.photoURL == null ? 'assets/avatar.svg' : user.photoURL
             return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
           } else {
             return Observable.of(null)
@@ -29,29 +32,26 @@ export class AuthService {
         })
   }
 
+  isLoggedIn(): boolean {
+    return this.user$ !== null;
+  }
 
   login(email: string, password: string) {
     this.afAuth.auth.signInWithEmailAndPassword(email, password)
-    .then(value => {
-      console.log('Nice, it worked!');
-      this.router.navigateByUrl('/');
-    })
-    .catch(error => {
-      console.log('Algo deu errado: ', error.message);
-      this._flashMessagesService.show(error.message, { cssClass: 'alert-danger', timeout: 999999, showCloseBtn: true })
-    });
+     .then((user) => {
+       this.updateUserData(user); // if using firestore
+       this.router.navigateByUrl('/login');
+     })
+     .catch((error) => this.handleError(error) );
   }
 
   emailSignup(email: string, password: string) {
     this.afAuth.auth.createUserWithEmailAndPassword(email, password)
     .then(value => {
-     console.log('Sucess', value);
-     this.router.navigateByUrl('/');
-    })
-    .catch(error => {
-      console.log('Algo deu errado: ', error.message);
-      this._flashMessagesService.show(error.message, { cssClass: 'alert-danger', timeout: 999999, showCloseBtn: true })
-    });
+      // this.notify.update('Conta criada com sucesso!!!', 'success');
+      this.login(email, password)
+      // this.router.navigateByUrl('/login');
+    }).catch((error) => this.handleError(error) );
   }
 
   googleLogin() {
@@ -62,12 +62,14 @@ export class AuthService {
   private oAuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
+        this.notify.update('Seja bem vindo!!!', 'success');
         this.updateUserData(credential.user)
-      })
+      }).catch((error) => this.handleError(error) );
   }
 
   signOut() {
     console.log("Saindo")
+    this.notify.update('Saindo!!!', 'success');
     this.afAuth.auth.signOut()
   }
 
@@ -115,5 +117,14 @@ export class AuthService {
     return false
   }
 
+  // If error, console log and notify user
+  private handleError(error: Error) {
+    console.error(error);
+    this.notify.update(error.message, 'error');
+  }
 
+  getUserAvatar(): string {
+    console.log(this.avatar)
+    return this.avatar
+  }
 }

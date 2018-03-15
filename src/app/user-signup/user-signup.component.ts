@@ -13,7 +13,6 @@ export class UserSignupComponent implements OnInit {
   ngOnInit() {
   }
 
-
   onSubmit(formData) {
     if (formData.valid) {
       console.log(formData.value);
@@ -23,6 +22,6 @@ export class UserSignupComponent implements OnInit {
       );
     }
   }
-  
+
 
 }

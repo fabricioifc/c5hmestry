@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
     private afs: AngularFirestore,
     public auth: AuthService,
     private _flashMessagesService: FlashMessagesService) {
-
   }
 
   ngOnInit() {

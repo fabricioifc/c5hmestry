@@ -17,8 +17,8 @@ export class UserLoginComponent implements OnInit {
 
   onSubmit(formData) {
     if (formData.valid) {
-      console.log(formData.value);
-      this.auth.emailSignup(
+      // console.log(formData.value);
+      this.auth.login(
         formData.value.email,
         formData.value.password
       );

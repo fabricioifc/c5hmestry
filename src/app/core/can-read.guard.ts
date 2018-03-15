@@ -21,7 +21,7 @@ export class CanReadGuard implements CanActivate {
       tap(canView => {
         if (!canView) {
           console.error('Access denied. Must have permission to view content')
-          this._flashMessagesService.show('Acesso negado. Deve ter permissão para ver este conteúdo', { cssClass: 'alert alert-danger', timeout: 999999, showCloseBtn: true });
+          this._flashMessagesService.show('Acesso negado. Deve ter permissão para ver este conteúdo', { cssClass: 'alert alert-danger', timeout: 5000, showCloseBtn: true });
         }
       })
     );
