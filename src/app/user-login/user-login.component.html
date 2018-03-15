@@ -15,35 +15,64 @@
 
 <!-- User NOT logged in -->
 <ng-template #guest>
-  <h3>Howdy, GUEST</h3>
-  <p>Login to get started...</p>
 
-  <button (click)="auth.googleLogin()" class="button btn-social btn-google">
-    <i class="fa fa-google"></i> Connect Google
-  </button>
+
+    <div class="card border-dark rounded-0">
+      <div class="card-header">
+          <h3 class="mb-0">Acessar área restrita</h3>
+      </div>
+      <div class="card-body">
+        <div class="row justify-content-around">
+          <div class="col-6">
+            <form #formData='ngForm' (ngSubmit)="onSubmit(formData)" id="formLogin" novalidate="">
+              <div class="form-group">
+                  <label for="email">E-mail *</label>
+                  <input type="text" class="form-control rounded-0" name="email" id="email" placeholder="Informe seu e-mail" required (ngModel)="email">
+                  <div class="invalid-feedback">Oops, informe seu e-mail.</div>
+              </div>
+              <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" class="form-control rounded-0" name="password" id="password" placeholder="Informe sua senha" required (ngModel)="password">
+                  <div class="invalid-feedback">Informe sua senha</div>
+              </div>
+              <button type="submit" [disabled]="!formData.valid" class="auth-btn btn btn-success rounded-0" id="btnLogin">Acessar</button>
+            </form>
+          </div>
+
+          <div class="col-4 float-right">
+            <button (click)="auth.googleLogin()" class="button btn-social btn-google btn-block">
+              <i class="fa fa-google"></i> Acessar com o Google
+            </button>
+          </div>
+      </div>
+
+    </div>
+  </div>
+
 </ng-template>
 
 <!-- User logged in -->
 <ng-template #authenticated>
   <div *ngIf="auth.user$ | async as user">
     <h3>Howdy, {{ user.displayName }}</h3>
-    <img  src="assets/avatar.svg" width="50px">
+    <!-- <img  src="assets/avatar.svg" width="50px"> -->
+    <img  src="{{user.photoURL}}" width="50px">
     <p>UID: {{ user.uid }}</p>
     <button (click)="auth.signOut()" class="button">Logout</button>
 
     <hr>
 
-    Subscriber: 
+    Subscriber:
     <span class="tag" [class.is-success]="user.roles?.subscriber">
       {{ user.roles?.subscriber }}
     </span><br>
 
-    Editor: 
+    Editor:
     <span class="tag" [class.is-success]="user.roles?.editor">
       {{ user.roles?.editor }}
     </span><br>
 
-    Admin: 
+    Admin:
     <span class="tag" [class.is-success]="user.roles?.admin">
       {{ user.roles?.admin }}
     </span><br>
@@ -52,7 +81,7 @@
 
   </div>
 
-  
+
 </ng-template>
 
 <hr>

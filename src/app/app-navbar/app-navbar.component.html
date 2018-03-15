@@ -20,22 +20,35 @@
           <a class="nav-link disabled" href="#">Glossário</a>
         </li>
       </ul>
-      <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
-        <li *ngIf="auth.user$ | async; then authenticated else guest">
-          <ng-template #guest>
-            <button (click)="auth.signOut()" class="btn btn-danger btn-bd-download d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3">Logout</button>
-          </ng-template>
 
-          <ng-template #authenticated>
-            <a href="#" routerLink="login" class="btn btn-bd-download d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3">
-              {{ user.email }}
-            </a>
-            <a href="#" routerLink="login" class="btn btn-success btn-bd-download d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3">
+      <div *ngIf="auth.user$ | async; then authenticated else guest" class=""></div>
+
+      <ng-template #guest>
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+          <li class="nav-item">
+            <a href="#" routerLink="login" class="nav-link">
               Login
             </a>
-          </ng-template>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </ng-template>
+
+      <ng-template #authenticated>
+
+        <ul *ngIf="auth.user$ | async as user" class="navbar-nav ml-auto nav-flex-icons">
+          <li class="nav-item avatar dropdown">
+            <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <img src="{{user.photoURL}}" class="img-fluid rounded-circle z-depth-0" width="35px">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-purple" aria-labelledby="navbarDropdownMenuLink-5">
+              <a routerLink="login" class="dropdown-item waves-effect waves-light" href="javascript:;;">Profile</a>
+              <a (click)="auth.signOut()" class="dropdown-item waves-effect waves-light" href="javascript:;;">Sair</a>
+            </div>
+          </li>
+        </ul>
+
+      </ng-template>
+
     </div>
   </nav>
 </header>

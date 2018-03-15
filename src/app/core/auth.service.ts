@@ -7,14 +7,17 @@ import { Observable } from 'rxjs/Observable';
 import { switchMap } from 'rxjs/operators';
 import { User } from './user';
 
+import { FlashMessagesService } from 'angular2-flash-messages';
+
 @Injectable()
 export class AuthService {
 
   user$: Observable<User>;
 
   constructor(public afAuth: AngularFireAuth,
-              private afs: AngularFirestore,
-              private router: Router) {
+            private afs: AngularFirestore,
+            private router: Router,
+            private _flashMessagesService: FlashMessagesService) {
       //// Get auth data, then get firestore user document || null
       this.user$ = this.afAuth.authState
         .switchMap(user => {
@@ -27,7 +30,29 @@ export class AuthService {
   }
 
 
-    ///// Login/Signup //////
+  login(email: string, password: string) {
+    this.afAuth.auth.signInWithEmailAndPassword(email, password)
+    .then(value => {
+      console.log('Nice, it worked!');
+      this.router.navigateByUrl('/');
+    })
+    .catch(error => {
+      console.log('Algo deu errado: ', error.message);
+      this._flashMessagesService.show(error.message, { cssClass: 'alert-danger', timeout: 999999, showCloseBtn: true })
+    });
+  }
+
+  emailSignup(email: string, password: string) {
+    this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+    .then(value => {
+     console.log('Sucess', value);
+     this.router.navigateByUrl('/');
+    })
+    .catch(error => {
+      console.log('Algo deu errado: ', error.message);
+      this._flashMessagesService.show(error.message, { cssClass: 'alert-danger', timeout: 999999, showCloseBtn: true })
+    });
+  }
 
   googleLogin() {
     const provider = new firebase.auth.GoogleAuthProvider()
@@ -42,6 +67,7 @@ export class AuthService {
   }
 
   signOut() {
+    console.log("Saindo")
     this.afAuth.auth.signOut()
   }
 
@@ -51,6 +77,8 @@ export class AuthService {
     const data: User = {
       uid: user.uid,
       email: user.email,
+      photoURL: user.photoURL,
+      displayName: user.displayName,
       roles: {
         subscriber: true
       }
