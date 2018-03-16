@@ -31,6 +31,9 @@ import { UploadFormComponent } from './upload-form/upload-form.component';
 import { FileDropDirective } from './file-drop.directive';
 import { UploadService } from './upload.service';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { AppEquipamentoComponent } from './app-equipamento/app-equipamento.component';
+import { AppSubstanciaComponent } from './app-substancia/app-substancia.component';
+import { AppGlossarioComponent } from './app-glossario/app-glossario.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,9 @@ import { AngularFireDatabase } from 'angularfire2/database';
     AppVidrariaComponent,
     UploadFormComponent,
     FileDropDirective,
+    AppEquipamentoComponent,
+    AppSubstanciaComponent,
+    AppGlossarioComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,11 +4,11 @@ import { Observable } from 'rxjs/Observable';
 import { Vidraria } from '../core/model/vidraria';
 
 @Component({
-  selector: 'app-vidraria',
-  templateUrl: './app-vidraria.component.html',
-  styleUrls: ['./app-vidraria.component.scss']
+  selector: 'app-substancia',
+  templateUrl: './app-substancia.component.html',
+  styleUrls: ['./app-substancia.component.scss']
 })
-export class AppVidrariaComponent implements OnInit {
+export class AppSubstanciaComponent implements OnInit {
 
   lista: Observable<Vidraria[]>;
 
