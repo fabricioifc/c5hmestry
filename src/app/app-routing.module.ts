@@ -7,6 +7,7 @@ import { SubscriberPageComponent } from './subscriber-page/subscriber-page.compo
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserSignupComponent } from './user-signup/user-signup.component';
 import { AppVidrariaComponent } from './app-vidraria/app-vidraria.component';
+import { UploadFormComponent } from './upload-form/upload-form.component';
 
 import { AdminGuard } from './core/admin.guard';
 import { CanReadGuard } from './core/can-read.guard';
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'secret', component: SuperSecretComponent, canActivate: [AdminGuard] },
   { path: 'login', component: UserLoginComponent },
   { path: 'registrar', component: UserSignupComponent },
-  { path: 'vidrarias', component: AppVidrariaComponent }
+  { path: 'vidrarias', component: AppVidrariaComponent },
+  { path: 'upload', component: UploadFormComponent }
 ];
 
 @NgModule({

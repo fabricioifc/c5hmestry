@@ -27,6 +27,10 @@ import { NotificationMessageComponent } from './ui/notification-message/notifica
 import { AppVidrariaComponent } from './app-vidraria/app-vidraria.component';
 
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { UploadFormComponent } from './upload-form/upload-form.component';
+import { FileDropDirective } from './file-drop.directive';
+import { UploadService } from './upload.service';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @NgModule({
   declarations: [
@@ -40,6 +44,8 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
     UserSignupComponent,
     NotificationMessageComponent,
     AppVidrariaComponent,
+    UploadFormComponent,
+    FileDropDirective,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +58,7 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
     FlashMessagesModule.forRoot(),
     Ng4LoadingSpinnerModule.forRoot()
   ],
-  providers: [],
+  providers: [AngularFireDatabase, UploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
