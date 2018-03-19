@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Upload } from './core/model/upload';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { NotifyService } from './core/notify.service';
 
 
 @Injectable()
@@ -9,7 +11,9 @@ export class UploadService {
 
   basePath = 'uploads';
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase,
+    private spinner: NgxSpinnerService,
+    private notify: NotifyService) { }
 
   pushUpload(upload: Upload) : firebase.storage.UploadTask {
 
@@ -45,7 +49,21 @@ export class UploadService {
   // Firebase files must have unique names in their respective storage dir
   // So the name serves as a unique key
   deleteFileStorage(name: string) {
+    this.addSpinner
     const storageRef = firebase.storage().ref();
-    storageRef.child(`${this.basePath}/${name}`).delete()
+    storageRef.child(`${this.basePath}/${name}`).delete().then((x) => {
+      this.removeSpinner
+    })
   }
+
+  addSpinner() {
+    this.spinner.show()
+  }
+
+  removeSpinner() {
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 300);
+  }
+
 }

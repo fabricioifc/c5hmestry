@@ -1,4 +1,4 @@
-export class Vidraria {
+export interface Vidraria {
 
   $key: string;
   imagem_name: string;

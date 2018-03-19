@@ -8,6 +8,7 @@ import { switchMap } from 'rxjs/operators';
 import { User } from './model/user';
 
 import { NotifyService } from './notify.service';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +18,7 @@ export class AuthService {
   avatar: string;
 
   constructor(public afAuth: AngularFireAuth,
-            private afs: AngularFirestore,
+            private db: AngularFireDatabase,
             private router: Router,
             private notify: NotifyService) {
       //// Get auth data, then get firestore user document || null
@@ -25,7 +26,7 @@ export class AuthService {
         .switchMap(user => {
           if (user) {
             this.avatar = user.photoURL == null ? 'assets/avatar.svg' : user.photoURL
-            return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
+            return this.db.object<User>(`users/${user.uid}`).valueChanges()
           } else {
             return Observable.of(null)
           }
@@ -75,7 +76,10 @@ export class AuthService {
 
   private updateUserData(user) {
     // Sets user data to firestore on login
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+    // const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+    const itemPath = `users/${user.uid}`;
+    // const item = this.db.object(itemPath).valueChanges() as Observable<User | null>;
+
     const data: User = {
       uid: user.uid,
       email: user.email,
@@ -85,7 +89,7 @@ export class AuthService {
         subscriber: true
       }
     }
-    return userRef.set(data, { merge: true })
+    return this.db.object(itemPath).update(data)
   }
 
 

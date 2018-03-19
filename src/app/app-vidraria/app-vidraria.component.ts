@@ -17,10 +17,10 @@ import { AuthService } from '../core/auth.service';
 export class AppVidrariaComponent implements OnInit {
   @ViewChild('form') form;
 
-  // vidraria: Vidraria = {} as Vidraria;
+  vidraria: Vidraria = {} as Vidraria;
   // colecao: AngularFirestoreCollection<Vidraria>;
   lista: Observable<Vidraria[]>;
-  vidraria: Vidraria = new Vidraria();
+  // vidraria: Vidraria;
   selectedFiles: FileList;
   upload: Upload;
   user;
@@ -35,14 +35,7 @@ export class AppVidrariaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.spinner.show();
     this.lista = this.service.getItemsList()
-    this.lista.subscribe((v) => {
-        setTimeout(() => {
-          this.spinner.hide();
-        }, 300);
-      }
-    )
   }
 
   detectFiles($event: Event) {
@@ -52,7 +45,7 @@ export class AppVidrariaComponent implements OnInit {
   submit() {
     const file = this.selectedFiles;
     if (file && file.length === 1) {
-      this.spinner.show();
+      this.addSpinner()
       this.upload = new Upload(file.item(0));
       this.upSvc.pushUpload(this.upload).then((x) => {
         this.vidraria.imagem_file = this.upload.url
@@ -73,11 +66,20 @@ export class AppVidrariaComponent implements OnInit {
   }
 
   private reset(): void {
-    this.vidraria = new Vidraria(); // reset item
+    // this.vidraria = new Vidraria(); // reset item
     this.form.nativeElement.reset()
+    this.removeSpinner()
+  }
+
+  addSpinner() {
+    this.spinner.show()
+  }
+
+  removeSpinner() {
     setTimeout(() => {
       this.spinner.hide();
     }, 300);
   }
+
 
 }
