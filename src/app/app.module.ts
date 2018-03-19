@@ -27,13 +27,18 @@ import { NotificationMessageComponent } from './ui/notification-message/notifica
 import { AppVidrariaComponent } from './app-vidraria/app-vidraria.component';
 
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { SanitizeHtmlPipe } from './sanitize-html.pipe';
+
 import { UploadFormComponent } from './upload-form/upload-form.component';
 import { FileDropDirective } from './file-drop.directive';
-import { UploadService } from './upload.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AppEquipamentoComponent } from './app-equipamento/app-equipamento.component';
 import { AppSubstanciaComponent } from './app-substancia/app-substancia.component';
 import { AppGlossarioComponent } from './app-glossario/app-glossario.component';
+
+import { VidrariaService } from './app-vidraria/shared/vidraria.service';
+import { UploadService } from './upload.service';
 
 @NgModule({
   declarations: [
@@ -52,6 +57,7 @@ import { AppGlossarioComponent } from './app-glossario/app-glossario.component';
     AppEquipamentoComponent,
     AppSubstanciaComponent,
     AppGlossarioComponent,
+    SanitizeHtmlPipe,
   ],
   imports: [
     BrowserModule,
@@ -62,9 +68,13 @@ import { AppGlossarioComponent } from './app-glossario/app-glossario.component';
     AngularFirestoreModule,
     AngularFireAuthModule,
     FlashMessagesModule.forRoot(),
-    Ng4LoadingSpinnerModule.forRoot()
+    Ng4LoadingSpinnerModule.forRoot(),
+    NgxSpinnerModule
   ],
-  providers: [AngularFireDatabase, UploadService],
+  exports: [
+    SanitizeHtmlPipe
+  ],
+  providers: [AngularFireDatabase, UploadService, VidrariaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

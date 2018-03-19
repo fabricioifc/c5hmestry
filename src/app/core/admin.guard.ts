@@ -3,7 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angul
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from './auth.service';
 import { tap, map, take } from 'rxjs/operators';
-import { FlashMessagesService } from 'angular2-flash-messages';
+import { NotifyService } from './notify.service';
 
 @Injectable()
 export class AdminGuard implements CanActivate {
@@ -11,7 +11,7 @@ export class AdminGuard implements CanActivate {
   message: string
 
   constructor(private auth: AuthService,
-              private _flashMessagesService: FlashMessagesService) {}
+    private notify: NotifyService) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -24,7 +24,8 @@ export class AdminGuard implements CanActivate {
         if (!isAdmin) {
           this.message = "Acesso negado - Apenas para administradores"
           // console.error(this.message)
-          this._flashMessagesService.show(this.message, { cssClass: 'alert-danger', timeout: 5000, showCloseBtn: true })
+          // this._flashMessagesService.show(this.message, { cssClass: 'alert-danger', timeout: 5000, showCloseBtn: true })
+          this.notify.update(this.message, 'error');
         }
       })
     );

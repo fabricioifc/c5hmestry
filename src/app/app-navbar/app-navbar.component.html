@@ -7,19 +7,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#" routerLink="">História <span class="sr-only">(current)</span></a>
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a class="nav-link" href="#" routerLink="/">História</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" [routerLinkActive]="['active']">
           <a class="nav-link" href="#" routerLink="/vidrarias">Vidrarias</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" [routerLinkActive]="['active']">
           <a class="nav-link" href="#" routerLink="/equipamentos">Equipamentos</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" [routerLinkActive]="['active']">
           <a class="nav-link" href="#" routerLink="/substancias">Substâncias</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" [routerLinkActive]="['active']">
           <a class="nav-link" href="#" routerLink="/glossario">Glossário</a>
         </li>
       </ul>
@@ -28,12 +28,12 @@
 
       <ng-template #guest>
         <ul class="navbar-nav ml-auto nav-flex-icons">
-          <li class="nav-item">
+          <li class="nav-item" [routerLinkActive]="['active']">
             <a href="#" routerLink="login" class="nav-link">
               Login
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" [routerLinkActive]="['active']">
             <a href="#" routerLink="registrar" class="nav-link">
               Registrar-se
             </a>
@@ -44,7 +44,7 @@
       <ng-template #authenticated>
 
         <ul *ngIf="auth.user$ | async as user" class="navbar-nav ml-auto nav-flex-icons">
-          <li class="nav-item avatar dropdown">
+          <li class="nav-item avatar dropdown" [routerLinkActive]="['active']">
             <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
               <img src="{{ auth.getUserAvatar() }}" class="img-fluid rounded-circle z-depth-0" width="35px">
             </a>

@@ -106,6 +106,11 @@ export class AuthService {
     return this.checkAuthorization(user, allowed)
   }
 
+  canAdmin(user: User): boolean {
+    const allowed = ['admin']
+    return this.checkAuthorization(user, allowed)
+  }
+
   // determines if user has matching role
   private checkAuthorization(user: User, allowedRoles: string[]): boolean {
     if (!user) return false
