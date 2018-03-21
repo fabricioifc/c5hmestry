@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-body">
+    <h6 class="text-center">
+      List of Products
+      <a [routerLink]="['new']" routerLinkActive="active">Novo</a>
+    </h6>
+    <table class="table table-sm table-hover">
+      <tbody>
+        <tr *ngFor="let product of productList">
+          <td>{{product.name}}</td>
+          <td>{{product.category}}</td>
+          <td>
+            <a class="btn btn-secondary text-white" [routerLink]="[product.$key, 'edit']">
+                <i class="fa fa-edit"></i>
+            </a>
+            <a class="btn btn-danger text-white" (click)="onDelete(product.$key)">
+                <i class="fa fa-trash"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

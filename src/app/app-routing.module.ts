@@ -11,10 +11,13 @@ import { UploadFormComponent } from './upload-form/upload-form.component';
 import { AppEquipamentoComponent } from './app-equipamento/app-equipamento.component';
 import { AppSubstanciaComponent } from './app-substancia/app-substancia.component';
 import { AppGlossarioComponent } from './app-glossario/app-glossario.component';
+import { ProductsComponent } from './components/products/products.component';
+import { ProductFormComponent } from './components/products/form/product-form.component';
 
 import { AdminGuard } from './core/admin.guard';
 import { CanReadGuard } from './core/can-read.guard';
 import { UserGuard } from './core/user.guard';
+import { ProductListComponent } from './components/products/list/product-list.component';
 
 
 const routes: Routes = [
@@ -27,7 +30,10 @@ const routes: Routes = [
   { path: 'upload', component: UploadFormComponent },
   { path: 'equipamentos', component: AppEquipamentoComponent },
   { path: 'substancias', component: AppSubstanciaComponent },
-  { path: 'glossario', component: AppGlossarioComponent }
+  { path: 'glossario', component: AppGlossarioComponent },
+  { path: 'products', component: ProductListComponent },
+  { path: 'products/new', component: ProductFormComponent, canActivate: [AdminGuard] },
+  { path: 'products/:id/edit', component: ProductFormComponent, canActivate: [AdminGuard]}
 ];
 
 @NgModule({

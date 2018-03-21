@@ -39,6 +39,18 @@ import { AppGlossarioComponent } from './app-glossario/app-glossario.component';
 
 import { VidrariaService } from './app-vidraria/shared/vidraria.service';
 import { UploadService } from './upload.service';
+import { ProductsComponent } from './components/products/products.component';
+import { ProductFormComponent } from './components/products/form/product-form.component';
+import { ProductListComponent } from './components/products/list/product-list.component';
+
+// service
+import { ProductService } from './services/product.service';
+
+// Toastr
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -58,6 +70,9 @@ import { UploadService } from './upload.service';
     AppSubstanciaComponent,
     AppGlossarioComponent,
     SanitizeHtmlPipe,
+    ProductsComponent,
+    ProductFormComponent,
+    ProductListComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,12 +84,15 @@ import { UploadService } from './upload.service';
     AngularFireAuthModule,
     FlashMessagesModule.forRoot(),
     Ng4LoadingSpinnerModule.forRoot(),
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
     NgxSpinnerModule
   ],
   exports: [
     SanitizeHtmlPipe
   ],
-  providers: [AngularFireDatabase, UploadService, VidrariaService],
+  providers: [AngularFireDatabase,
+    UploadService, VidrariaService, ProductService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
