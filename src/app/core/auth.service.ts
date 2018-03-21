@@ -33,8 +33,8 @@ export class AuthService {
         })
   }
 
-  isLoggedIn(): boolean {
-    return this.user$ !== null;
+  isLoggedIn(user: User): boolean {
+    return user !== null;
   }
 
   login(email: string, password: string) {

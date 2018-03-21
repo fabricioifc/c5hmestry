@@ -1,24 +1,39 @@
-<div class="card">
-  <div class="card-body">
-    <h6 class="text-center">
-      List of Products
-      <a [routerLink]="['new']" routerLinkActive="active">Novo</a>
-    </h6>
-    <table class="table table-sm table-hover">
-      <tbody>
-        <tr *ngFor="let product of productList">
-          <td>{{product.name}}</td>
-          <td>{{product.category}}</td>
-          <td>
-            <a class="btn btn-secondary text-white" [routerLink]="[product.$key, 'edit']">
-                <i class="fa fa-edit"></i>
-            </a>
-            <a class="btn btn-danger text-white" (click)="onDelete(product.$key)">
-                <i class="fa fa-trash"></i>
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<div *ngIf="auth.canAdmin(user); then admin else guest" class=""></div>
+
+<ng-template #admin>
+
+  <button type="button" [routerLink]="['new']" class="btn btn-outline-dark">Novo</button>
+
+  <table class="table table-sm table-striped table-bordered">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Descrição</th>
+        <th>Categoria</th>
+        <th>Localização</th>
+        <th>Preço</th>
+        <th colspan="2">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of productList">
+        <td>{{product.name}}</td>
+        <td>{{product.category}}</td>
+        <td>{{product.location}}</td>
+        <td>{{product.price}}</td>
+        <td>
+          <a class="btn btn-secondary text-white" [routerLink]="[product.$key, 'edit']">
+              <i class="fa fa-edit"></i>
+          </a>
+          <a class="btn btn-danger text-white" (click)="onDelete(product)">
+              <i class="fa fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+</ng-template>
+
+<ng-template #guest>
+    Pendente
+</ng-template>

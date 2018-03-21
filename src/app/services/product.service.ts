@@ -6,6 +6,8 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 // Model
 import { Product } from '../models/product';
+import { UploadService } from '../upload.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable()
 export class ProductService {
@@ -13,7 +15,10 @@ export class ProductService {
   productList: AngularFireList<any>;
   selectedProduct: Product = new Product();
 
-  constructor(private firebase: AngularFireDatabase) { }
+  constructor(private firebase: AngularFireDatabase,
+    private upSvc: UploadService,
+    private spinner: NgxSpinnerService
+  ) { }
 
   getProducts() {
     return this.productList = this.firebase.list('products');
@@ -27,12 +32,14 @@ export class ProductService {
   }
 
   insertProduct(product: Product)
-  {
+  {    
     this.productList.push({
       name: product.name,
       category: product.category,
       location: product.location,
-      price: product.price
+      price: product.price,
+      fileurl: product.fileurl,
+      filename: product.filename
     });
   }
 
@@ -42,12 +49,24 @@ export class ProductService {
       name: product.name,
       category: product.category,
       location: product.location,
-      price: product.price
+      price: product.price,
+      fileurl: product.fileurl,
+      filename: product.filename
     });
   }
 
-  deleteProduct($key: string)
-  {
-    this.productList.remove($key);
+  deleteProduct(product: Product) : Promise<any> {
+    this.productList.remove(product.$key)
+    return this.upSvc.deleteFileStorage(product.filename)
+  }
+
+  addSpinner() {
+    this.spinner.show()
+  }
+
+  removeSpinner() {
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 300);
   }
 }

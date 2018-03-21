@@ -56,12 +56,23 @@
           </div>
 
           <div class="form-group">
+            <div class="input-group">
+              <input
+                type="file"
+                class="form-control"
+                name="file"
+                (change)="detectFiles($event)"
+                >
+            </div>
+          </div>
+
+          <div class="form-group">
             <button class="btn btn-primary" type="submit" [disabled]="!productForm.form.valid" >
                 <i class="fa fa-plus-circle"></i> Add A Product
             </button>
-            <button class="btn btn-secondary" type="reset" (click)="resetForm(productForm)">
+            <!-- <button class="btn btn-secondary" type="reset" (click)="resetForm(productForm)">
                 <i class="fa fa-sync-alt"></i> Reset
-            </button>
+            </button> -->
             <a class="btn btn-secondary" routerLink="/products">
               <i class="fa fa-back"></i> Voltar
             </a>

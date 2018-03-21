@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import * as firebase from 'firebase';
 
 //  Service
 import { ProductService } from '../../../services/product.service';
-
 // Class
 import { Product } from '../../../models/product';
-
 // toastr
 import { ToastrService } from 'ngx-toastr';
 import { Route } from '@angular/compiler/src/core';
+import { Upload } from '../../../core/model/upload';
+import { UploadService } from '../../../upload.service';
 
 @Component({
   selector: 'app-product',
@@ -19,11 +20,15 @@ import { Route } from '@angular/compiler/src/core';
 })
 export class ProductFormComponent implements OnInit {
 
+  selectedFiles: FileList;
+  upload: Upload;
+
   constructor(
     private productService: ProductService,
     private toastr: ToastrService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private upSvc: UploadService
   ) { }
 
   ngOnInit() {
@@ -41,14 +46,22 @@ export class ProductFormComponent implements OnInit {
   }
 
   onSubmit(productForm: NgForm) {
-    if(productForm.value.$key == null)
-      this.productService.insertProduct(productForm.value);
-    else
-      this.productService.updateProduct(productForm.value);
+    this.productService.addSpinner()
+    this.upload = new Upload(this.selectedFiles.item(0));
+    this.upSvc.pushUpload(this.upload).then((x) => {
+      productForm.value.fileurl = this.upload.url
+      productForm.value.filename = this.upload.name
 
-    this.resetForm(productForm);
-    this.toastr.success('Sucessful Operation', 'Product Registered');
-    this.router.navigate(['/products']);
+      if(productForm.value.$key == null)
+        this.productService.insertProduct(productForm.value);
+      else
+        this.productService.updateProduct(productForm.value);
+
+      this.resetForm(productForm);
+      this.toastr.success('Operação efetuada com sucesso', 'Produto salvo');
+      this.router.navigate(['/products']);
+      this.productService.removeSpinner()
+    })
   }
 
   resetForm(productForm?: NgForm)
@@ -56,6 +69,10 @@ export class ProductFormComponent implements OnInit {
     if(productForm != null)
       productForm.reset();
       this.productService.selectedProduct = new Product();
+  }
+
+  detectFiles($event: Event) {
+    this.selectedFiles = ($event.target as HTMLInputElement).files;
   }
 
 }

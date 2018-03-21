@@ -4,4 +4,6 @@ export class Product {
   category: string;
   location: string;
   price: number;
+  fileurl: string;
+  filename: string;
 }

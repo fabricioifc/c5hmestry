@@ -9,6 +9,8 @@ import { ProductService } from '../../../services/product.service';
 // toastr
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../core/auth.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-product-list',
@@ -18,12 +20,14 @@ import { Router } from '@angular/router';
 export class ProductListComponent implements OnInit {
 
   productList: Product[];
+  user;
 
   constructor(
     private productService: ProductService,
     private toastr: ToastrService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private auth: AuthService
+  ) { this.auth.user$.subscribe(user => this.user = user) }
 
   ngOnInit() {
     return this.productService.getProducts()
@@ -41,10 +45,13 @@ export class ProductListComponent implements OnInit {
     this.productService.selectedProduct = Object.assign({}, product);
   }
 
-  onDelete($key: string) {
+  onDelete(product: Product) {
     if(confirm('Are you sure you want to delete it?')) {
-      this.productService.deleteProduct($key);
-      this.toastr.warning('Deleted Successfully', 'Product Removed');
+      this.productService.addSpinner()
+      this.productService.deleteProduct(product).then(x => {
+        this.toastr.warning('Deletado com sucesso', 'Produto removido');
+        this.productService.removeSpinner()
+      });
     }
   }
 
