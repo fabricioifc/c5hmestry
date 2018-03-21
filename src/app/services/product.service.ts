@@ -13,7 +13,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class ProductService {
 
   productList: AngularFireList<any>;
-  selectedProduct: Product = new Product();
 
   constructor(private firebase: AngularFireDatabase,
     private upSvc: UploadService,

@@ -22,6 +22,7 @@ export class ProductFormComponent implements OnInit {
 
   selectedFiles: FileList;
   upload: Upload;
+  selectedProduct: Product = new Product();
 
   constructor(
     private productService: ProductService,
@@ -38,7 +39,7 @@ export class ProductFormComponent implements OnInit {
       this.productService.getProduct(id).subscribe(x => {
         let product = Object.assign(new Product(), x)
         product.$key = id
-        this.productService.selectedProduct = product;
+        this.selectedProduct = product;
       });      
     } else {
       this.resetForm();
@@ -68,7 +69,7 @@ export class ProductFormComponent implements OnInit {
   {
     if(productForm != null)
       productForm.reset();
-      this.productService.selectedProduct = new Product();
+      this.selectedProduct = new Product();
   }
 
   detectFiles($event: Event) {

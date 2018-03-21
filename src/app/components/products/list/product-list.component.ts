@@ -21,12 +21,13 @@ export class ProductListComponent implements OnInit {
 
   productList: Product[];
   user;
+  selectedProduct: Product = new Product();
 
   constructor(
     private productService: ProductService,
     private toastr: ToastrService,
     private router: Router,
-    private auth: AuthService
+    public auth: AuthService
   ) { this.auth.user$.subscribe(user => this.user = user) }
 
   ngOnInit() {
@@ -42,7 +43,7 @@ export class ProductListComponent implements OnInit {
   }
 
   onEdit(product: Product) {
-    this.productService.selectedProduct = Object.assign({}, product);
+    this.selectedProduct = Object.assign({}, product);
   }
 
   onDelete(product: Product) {

@@ -2,7 +2,7 @@
   <div class="card-body">
       <form #productForm="ngForm" #form (ngSubmit)="onSubmit(productForm)">
           <!-- TO UPDATE -->
-          <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="productService.selectedProduct.$key">
+          <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="selectedProduct.$key">
 
           <div class="form-group">
             <input
@@ -10,7 +10,7 @@
               class="form-control"
               name="name"
               #name="ngModel"
-              [(ngModel)]="productService.selectedProduct.name"
+              [(ngModel)]="selectedProduct.name"
               placeholder="Add A Product"
               required="required"
               autofocus="autofocus"
@@ -22,7 +22,7 @@
                 class="form-control"
                 name="category"
                 #category="ngModel"
-                [(ngModel)]="productService.selectedProduct.category"
+                [(ngModel)]="selectedProduct.category"
                 placeholder="Add A Category"
                 required="required"
                 >
@@ -33,7 +33,7 @@
               class="form-control"
               name="location"
               #location="ngModel"
-              [(ngModel)]="productService.selectedProduct.location"
+              [(ngModel)]="selectedProduct.location"
               placeholder="Add A Location"
               required="required"
               >
@@ -48,7 +48,7 @@
                 class="form-control"
                 name="price"
                 #price="ngModel"
-                [(ngModel)]="productService.selectedProduct.price"
+                [(ngModel)]="selectedProduct.price"
                 placeholder="Add A Price"
                 required="required"
                 >
