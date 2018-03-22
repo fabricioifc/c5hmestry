@@ -30,7 +30,7 @@ export class VidrariaListComponent implements OnInit {
     private router: Router,
     protected spinner: NgxSpinnerService,
     protected notify: NotifyService,
-    protected auth: AuthService 
+    public auth: AuthService 
   ) {
     
   }
