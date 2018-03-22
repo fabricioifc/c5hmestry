@@ -1,0 +1,29 @@
+<button *ngIf="auth.canAdmin(user)" type="button" [routerLink]="['new']" class="btn btn-outline-dark">Nova vidraria</button>
+<hr>
+
+<div *ngIf="!lista">
+  <div class="alert alert-danger" role="alert">
+    <h3>Nenhum item encontrado.</h3>
+  </div>
+</div>
+
+<div *ngIf="lista">
+  <div class="card" *ngFor="let l of lista | async">
+    <div class="card-body">
+      <div class="card-title">
+        <h5>
+          <span>{{ l.titulo }}</span>
+          <span class="pull-right">
+            <img src="{{ l.imagem_file }}" class="img-fluid rounded-circle z-depth-0" width="35px">
+          </span>
+        </h5>
+      </div>
+      <div class="card-text">
+        <p [innerHTML]="l.texto | sanitizeHtml"></p>
+      </div>
+    </div>
+    <div class="card-footer" *ngIf="auth.canAdmin(user)">
+      <span class="button is-small is-danger card-footer-item" (click)='onDelete(l)'>Remover item</span>
+    </div>
+  </div>
+</div>

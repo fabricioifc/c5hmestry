@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Upload } from './core/model/upload';
+import { Upload } from '../models/upload';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { NotifyService } from './core/notify.service';
+import { NotifyService } from '../core/notify.service';
 import { PromiseState } from 'q';
 
 

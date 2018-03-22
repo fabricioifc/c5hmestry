@@ -6,7 +6,7 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 // Model
 import { Product } from '../models/product';
-import { UploadService } from '../upload.service';
+import { UploadService } from '../services/upload.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable()

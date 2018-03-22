@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { UploadService } from '../upload.service';
-import { Upload } from '../core/model/upload';
+import { UploadService } from '../services/upload.service';
+import { Upload } from '../models/upload';
 import * as _ from "lodash";
 
 @Component({

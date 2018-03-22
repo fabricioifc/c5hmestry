@@ -4,8 +4,8 @@ import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
-import { switchMap } from 'rxjs/operators';
-import { User } from './model/user';
+import { switchMap, merge } from 'rxjs/operators';
+import { User } from '../models/user';
 
 import { NotifyService } from './notify.service';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -78,7 +78,7 @@ export class AuthService {
     // Sets user data to firestore on login
     // const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const itemPath = `users/${user.uid}`;
-    // const item = this.db.object(itemPath).valueChanges() as Observable<User | null>;
+    const item = this.db.object(itemPath).valueChanges() as Observable<User | null>;
 
     const data: User = {
       uid: user.uid,
@@ -89,7 +89,13 @@ export class AuthService {
         subscriber: true
       }
     }
-    return this.db.object(itemPath).update(data)
+
+    item.subscribe(u => {
+      if (u) {
+        data.roles = u.roles
+      }
+      return this.db.object(itemPath).update(data)
+    })
   }
 
 

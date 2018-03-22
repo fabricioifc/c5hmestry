@@ -10,8 +10,8 @@ import { Product } from '../../../models/product';
 // toastr
 import { ToastrService } from 'ngx-toastr';
 import { Route } from '@angular/compiler/src/core';
-import { Upload } from '../../../core/model/upload';
-import { UploadService } from '../../../upload.service';
+import { Upload } from '../../../models/upload';
+import { UploadService } from '../../../services/upload.service';
 
 @Component({
   selector: 'app-product',

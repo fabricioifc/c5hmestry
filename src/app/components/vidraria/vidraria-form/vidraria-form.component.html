@@ -1,0 +1,23 @@
+<div class="card">
+  <div class="card-header">
+    Cadastrar vidraria
+  </div>
+  <div class="card-body">
+    <form #productForm="ngForm" #form (ngSubmit)="onSubmit(productForm)">
+      <div class="form-group">
+        <label for="titulo">Título</label>
+        <input type="text" name="titulo" id="titulo" [(ngModel)]="objeto.titulo" class="form-control" 
+        autofocus="true" required="required">
+      </div>
+      <div class="form-group">
+        <label for="texto">Texto</label>
+        <textarea rows="8" name="texto" id="texto" [(ngModel)]="objeto.texto" class="form-control" required="required"></textarea>
+      </div>
+      <div class="form-group">
+        <input type="file" name="file" class="form-control" (change)="detectFiles($event)" required="required">
+      </div>
+
+      <button type="submit" class="btn btn-default" [disabled]="!productForm.form.valid">Cadastrar</button>
+    </form>
+  </div>
+</div>
