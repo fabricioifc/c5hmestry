@@ -12,6 +12,7 @@ import { CoreModule } from './core/core.module';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 // Componentes
 import { AppComponent } from './app.component';
@@ -73,7 +74,8 @@ import { VidrariaFormComponent } from './components/vidraria/vidraria-form/vidra
     Ng4LoadingSpinnerModule.forRoot(),
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot()
   ],
   exports: [
     SanitizeHtmlPipe

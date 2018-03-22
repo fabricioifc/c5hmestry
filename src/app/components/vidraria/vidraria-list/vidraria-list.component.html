@@ -23,7 +23,14 @@
       </div>
     </div>
     <div class="card-footer" *ngIf="auth.canAdmin(user)">
-      <span class="button is-small is-danger card-footer-item" (click)='onDelete(l)'>Remover item</span>
+      <div class="button-group">
+        <a class="btn btn-secondary text-white" [routerLink]="[l.$key, 'edit']">
+            <i class="fa fa-edit"></i>
+        </a>
+        <a class="btn btn-danger text-white" (click)='onDelete(l)'>
+            <i class="fa fa-trash"></i>
+        </a>
+      </div>
     </div>
   </div>
 </div>

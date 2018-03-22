@@ -57,15 +57,16 @@ export class VidrariaFormComponent implements OnInit {
       } else {
         this.salvar(productForm)
       }
-      
     }
   }
 
   salvar(productForm: NgForm) {
+    console.log(productForm.value);
+    
     if(productForm.value.$key == null)
       this.service.createItem(productForm.value);
     else
-      this.service.updateItem(productForm.value.$key, productForm.value);
+      this.service.updateItem(productForm.value);
 
     this.resetForm(productForm);
     this.toastr.success('Operação efetuada com sucesso', 'Produto salvo');

@@ -25,6 +25,7 @@
     "@angular/service-worker": "^5.0.0",
     "angular-bootstrap-md": "^5.2.2",
     "angular-font-awesome": "^3.1.2",
+    "angular-froala-wysiwyg": "^2.7.6",
     "angular2-flash-messages": "^2.0.5",
     "angularfire2": "^5.0.0-rc.4",
     "bootstrap": "^4.0.0-beta.3",

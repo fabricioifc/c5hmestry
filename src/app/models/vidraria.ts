@@ -1,8 +1,8 @@
 export class Vidraria {
 
   $key: string;
-  imagem_name: string;
-  imagem_file: string;
+  filename: string;
+  fileurl: string;
   titulo: string;
   texto: string;
 }

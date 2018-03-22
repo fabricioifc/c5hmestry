@@ -40,25 +40,26 @@ export class VidrariaService {
   }
 
   // Create a brand new item
-  createItem(item: Vidraria) {
-    return this.itemsRef.push(item).then(() => {
+  createItem(value: Vidraria) {
+    const $key = value.$key
+    delete value.$key
+    return this.itemsRef.push(value).then(() => {
       // this.handleSuccess("Item adicionado com sucesso!")
     })
   }
 
   // Update an exisiting item
-  updateItem(key: string, value: any): void {
-    this.itemsRef.update(key, value).then(() => {
-      // this.handleSuccess("Item atualizado com sucesso!")
-    }).catch((error) => {
-      // this.handleError(error)
-    });
+  updateItem(value: Vidraria): void {
+    const $key = value.$key
+    delete value.$key
+    
+    this.itemsRef.update($key, value)
   }
 
   // Deletes a single item
   deleteItem(objeto: Vidraria): Promise<any> {
-    if (objeto.imagem_name != null) {
-      this.upSvc.deleteFileStorage(objeto.imagem_name)
+    if (objeto.filename != null) {
+      this.upSvc.deleteFileStorage(objeto.filename)
     }
     return this.itemsRef.remove(objeto.$key)
   }
